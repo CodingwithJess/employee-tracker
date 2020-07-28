@@ -20,7 +20,7 @@ function start(){
     name: "wantToDo",
     type: "list",
     message: "What would you like to do?",
-    choices: ["View all employees", "View all roles", "View all departments", "Add employee", "Add role", "Add department", "Update employee role"]
+    choices: ["View all employees", "View all roles", "View all departments", "Add employee", "Add role", "Add department", "Update employee role", "Exit"]
   })
   .then(function(answer){
     switch (answer.wantToDo){
@@ -45,6 +45,8 @@ function start(){
       case "Update employee role":
         updateEmployee();
         break;
+      default:
+        connection.end();
       };   
   });
 };
@@ -55,6 +57,7 @@ function allEmployees(){
       throw err
     }else {
       console.table(res)
+      start();
     }
   });
 };
@@ -65,6 +68,7 @@ function allRoles(){
       throw err
     }else {
       console.table(res)
+      start();
     }
   });
 };
@@ -75,6 +79,7 @@ function allDepartments(){
       throw err
     }else {
       console.table(res)
+      start();
     }
   });
 };
