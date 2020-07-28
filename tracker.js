@@ -1,5 +1,6 @@
 const mysql = require ("mysql");
 const inquirer = require ("inquirer");
+const cTable = require('console.table');
 
 const connection = mysql.createConnection({
   host: "localhost",
@@ -43,8 +44,8 @@ function start(){
         break;
       case "Update employee role":
         updateEmployee();
-        break;  
-    };
+        break;
+      };   
   });
 };
 
@@ -53,7 +54,7 @@ function allEmployees(){
     if (err){
       throw err
     }else {
-      console.log(res)
+      console.table(res)
     }
   });
 };
@@ -63,7 +64,7 @@ function allRoles(){
     if (err){
       throw err
     }else {
-      console.log(res)
+      console.table(res)
     }
   });
 };
@@ -73,7 +74,7 @@ function allDepartments(){
     if (err){
       throw err
     }else {
-      console.log(res)
+      console.table(res)
     }
   });
 };
