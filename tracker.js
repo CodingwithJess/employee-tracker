@@ -47,3 +47,39 @@ function start(){
     };
   });
 };
+
+function allEmployees(){
+  connection.query("SELECT * FROM employee", function (err,res){
+    if (err){
+      throw err
+    }else {
+      console.log(res)
+    }
+  });
+};
+
+function allRoles(){
+  connection.query("SELECT * FROM role", function (err,res){
+    if (err){
+      throw err
+    }else {
+      console.log(res)
+    }
+  });
+};
+
+function allDepartments(){
+  connection.query("SELECT * FROM department", function (err,res){
+    if (err){
+      throw err
+    }else {
+      console.log(res)
+    }
+  });
+};
+
+
+// addEmployee();
+// addRole();
+// addDepartment();
+// updateEmployee();
