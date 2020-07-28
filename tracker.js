@@ -43,7 +43,7 @@ function start(){
         break;
       case "Update employee role":
         updateEmployee();
-        break;
+        break;  
     };
   });
 };
