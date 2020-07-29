@@ -85,7 +85,94 @@ function allDepartments(){
 };
 
 
-// addEmployee();
-// addRole();
-// addDepartment();
+function addEmployee(){
+  inquirer.prompt([
+    {
+      type: "input",
+      name: "firstName",
+      message: "What is the employee's first name?"
+    },
+    {
+      type: "input",
+      name: "lastName",
+      message: "What is the employee's last name?"
+    },
+    {
+      type: "input",
+      name: "employeeRoleID",
+      message: "What is the employee's roleID?"
+    },
+  ]).then(function(answer){
+    connection.query(
+      "INSERT INTO employee SET ?",
+      {
+        first_name: answer.firstName,
+        last_name: answer.lastName,
+        role_id: answer.employeeRoleID,
+      },
+      function (err){
+        if (err) throw err;
+        console.log("New employee added!");
+        start();
+      }
+    );
+  });
+};
+
+function addRole(){
+  inquirer.prompt([
+    {
+      type: "input",
+      name: "title",
+      message: "What is the new role?"
+    },
+    {
+      type: "input",
+      name: "salary",
+      message: "What is the salary?"
+    },
+    {
+      type: "input",
+      name: "departmentID",
+      message: "What is the department ID?"
+    },
+  ]).then(function(answer){
+    connection.query(
+      "INSERT INTO role SET ?",
+      {
+        title: answer.title,
+        salary: answer.salary,
+        department_id: answer.departmentID,
+      },
+      function (err){
+        if (err) throw err;
+        console.log("New role added!");
+        start();
+      }
+    );
+  });
+};
+
+function addDepartment(){
+  inquirer.prompt([
+    {
+      type: "input",
+      name: "depName",
+      message: "What is the new department name?"
+    },
+  ]).then(function(answer){
+    connection.query(
+      "INSERT INTO department SET ?",
+      {
+        depName: answer.depName,
+      },
+      function (err){
+        if (err) throw err;
+        console.log("New department added!");
+        start();
+      }
+    );
+  });
+};
+
 // updateEmployee();
