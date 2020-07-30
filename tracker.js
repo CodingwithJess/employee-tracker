@@ -10,17 +10,17 @@ const connection = mysql.createConnection({
   database: "employeeTracker_DB"
 });
 
-connection.connect(function (err){
+connection.connect((err) => {
   if(err)throw err;
   start();
 })
-
-function start(){
+// initial question with all options
+const start = () => {
   inquirer.prompt({
     name: "wantToDo",
     type: "list",
     message: "What would you like to do?",
-    choices: ["View all employees", "View all roles", "View all departments", "Add employee", "Add role", "Add department", "Update employee role", "Exit"]
+    choices: ["View all employees", "View all roles", "View all departments","View all employees by department","Add employee", "Add role", "Add department", "Update employee role", "Exit"]
   })
   .then(function(answer){
     switch (answer.wantToDo){
@@ -32,6 +32,9 @@ function start(){
         break;
       case "View all departments":
         allDepartments();
+        break;
+      case "View all employees by department":
+        employeeByDep();
         break;
       case "Add employee":
         addEmployee();
@@ -51,8 +54,9 @@ function start(){
   });
 };
 
-function allEmployees(){
-  connection.query("SELECT * FROM employee", function (err,res){
+// viewing all categories
+const allEmployees = () => {
+  connection.query("SELECT * FROM employee",(err,res) => {
     if (err){
       throw err
     }else {
@@ -62,8 +66,8 @@ function allEmployees(){
   });
 };
 
-function allRoles(){
-  connection.query("SELECT * FROM role", function (err,res){
+const allRoles = () => {
+  connection.query("SELECT * FROM role",(err,res) => {
     if (err){
       throw err
     }else {
@@ -73,8 +77,8 @@ function allRoles(){
   });
 };
 
-function allDepartments(){
-  connection.query("SELECT * FROM department", function (err,res){
+const allDepartments = () => {
+  connection.query("SELECT * FROM department",(err,res) => {
     if (err){
       throw err
     }else {
@@ -84,8 +88,24 @@ function allDepartments(){
   });
 };
 
+// const employeeByDep = () => {
+//   inquirer.prompt([
+//     {
+//       type: "list",
+//       name: "byDepartment",
+//       message: "Choose department to view",
+//       choices: ["Sales","Marketing","Finance", "IT", "Engineering", "Customer Service"]
+//     },
+//   ])
+//   connection.query("SELECT first_name, last_name, name FROM employee INNER JOIN department ON employee.department_id = department.id WHERE department.name =?", [department], (err, data) => {
+//     if (err) throw err;
+//     console.table(data);
+//     start();
+//   })
+// }
 
-function addEmployee(){
+// adding categories
+const addEmployee = () => {
   inquirer.prompt([
     {
       type: "input",
@@ -119,7 +139,7 @@ function addEmployee(){
   });
 };
 
-function addRole(){
+const addRole = () => {
   inquirer.prompt([
     {
       type: "input",
@@ -153,7 +173,7 @@ function addRole(){
   });
 };
 
-function addDepartment(){
+const addDepartment = () => {
   inquirer.prompt([
     {
       type: "input",
@@ -175,4 +195,12 @@ function addDepartment(){
   });
 };
 
-// updateEmployee();
+// updating categories
+const updateEmployee = () => {
+  inquirer.prompt([
+    {
+
+
+    },
+  ])
+};
