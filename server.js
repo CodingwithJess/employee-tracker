@@ -20,9 +20,11 @@ const start = () => {
     name: "wantToDo",
     type: "list",
     message: "What would you like to do?",
-    choices: ["View all employees", "View all roles", "View all departments", "Add employee", "Add role", "Add department", "Update employee role", "Exit"]
+    choices: ["View all employees", "View all roles", "View all departments","Add employee", "Add role", "Add department", "Update employee role", "Exit"]
   })
-// "View all employees by department",
+
+  // , "View all employees by department"
+
 
   .then(function(answer){
     switch (answer.wantToDo){
@@ -37,7 +39,7 @@ const start = () => {
         break;
       // case "View all employees by department":
       //   employeeByDep();
-      //   break;
+        break;
       case "Add employee":
         addEmployee();
         break;
@@ -79,16 +81,41 @@ const allRoles = () => {
   });
 };
 
-const allDepartments = () => {
-  connection.query("SELECT * FROM department",(err,res) => {
-    if (err){
-      throw err
-    }else {
-      console.table(res)
-      start();
-    }
-  });
-};
+// const viewAllDep = [];
+
+// const allDepartments = () => {
+//   connection.query("SELECT * FROM department",(err,res) => {
+//     if (err){
+//       throw err
+//     }else {
+//       viewAllDep.push(res)
+//       console.log(res.depName)
+      // console.table(res)
+      // start();
+    // }
+//   });
+// };
+
+
+// const employeeByDep = () => {
+//   inquirer.prompt([
+//     {
+//       type: "list",
+//       name: "depView",
+//       message: "Which department would you like to view?",
+//       choices: [viewAllDep.depName]
+//     },
+//   ]).then(function(answer){
+//   connection.query("SELECT employee.first_name, employee.last_name, employee.id, role.title FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id",(err,res) => {
+//     if (err){
+//       throw err
+//     }else {
+//       console.table(res)
+//       start();
+//     }
+//   });
+//   });
+// }
 
 
 // adding categories
