@@ -20,8 +20,10 @@ const start = () => {
     name: "wantToDo",
     type: "list",
     message: "What would you like to do?",
-    choices: ["View all employees", "View all roles", "View all departments","View all employees by department","Add employee", "Add role", "Add department", "Update employee role", "Exit"]
+    choices: ["View all employees", "View all roles", "View all departments", "Add employee", "Add role", "Add department", "Update employee role", "Exit"]
   })
+// "View all employees by department",
+
   .then(function(answer){
     switch (answer.wantToDo){
       case "View all employees":
@@ -33,9 +35,9 @@ const start = () => {
       case "View all departments":
         allDepartments();
         break;
-      case "View all employees by department":
-        employeeByDep();
-        break;
+      // case "View all employees by department":
+      //   employeeByDep();
+      //   break;
       case "Add employee":
         addEmployee();
         break;
@@ -196,10 +198,21 @@ const updateEmployee = () => {
       message: "What would you like to change their role ID to?"
     }
   ]).then((answer) => {
-    connection.query(`UPDATE employees SET role_id = ${answer.role_id} WHERE first_name = '${answer.first_name}' && last_name = '${answer.last_name}'`, (err) => {
+    connection.query( "UPDATE employee SET ? WHERE ? AND ?",
+    [
+      {
+        role_id: answer.role_id
+      },
+      {
+        first_name: answer.first_name
+      },
+      {
+        last_name: answer.last_name
+      }
+    ], (err) => {
       if (err) throw err;
-      console.log("Employee updated!")
-      allEmployees();
+      console.log("Employee role ID updated!")
+      start();
   })
   })
 }
