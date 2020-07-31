@@ -88,21 +88,6 @@ const allDepartments = () => {
   });
 };
 
-// const employeeByDep = () => {
-//   inquirer.prompt([
-//     {
-//       type: "list",
-//       name: "byDepartment",
-//       message: "Choose department to view",
-//       choices: ["Sales","Marketing","Finance", "IT", "Engineering", "Customer Service"]
-//     },
-//   ])
-//   connection.query("SELECT first_name, last_name, name FROM employee INNER JOIN department ON employee.department_id = department.id WHERE department.name =?", [department], (err, data) => {
-//     if (err) throw err;
-//     console.table(data);
-//     start();
-//   })
-// }
 
 // adding categories
 const addEmployee = () => {
@@ -199,8 +184,22 @@ const addDepartment = () => {
 const updateEmployee = () => {
   inquirer.prompt([
     {
-
-
+      name: "first_name",
+      message: "Whats the first name of the employee you want to update?"
     },
-  ])
-};
+    {
+      name: "last_name",
+      message: "Whats the last name of the employee you want to update?"
+    },
+    {
+      name: "role_id",
+      message: "What would you like to change their role ID to?"
+    }
+  ]).then((answer) => {
+    connection.query(`UPDATE employees SET role_id = ${answer.role_id} WHERE first_name = '${answer.first_name}' && last_name = '${answer.last_name}'`, (err) => {
+      if (err) throw err;
+      console.log("Employee updated!")
+      allEmployees();
+  })
+  })
+}
