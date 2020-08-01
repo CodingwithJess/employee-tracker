@@ -39,7 +39,7 @@ const start = () => {
         break;
       // case "View all employees by department":
       //   employeeByDep();
-        break;
+        // break;
       case "Add employee":
         addEmployee();
         break;
@@ -83,18 +83,16 @@ const allRoles = () => {
 
 // const viewAllDep = [];
 
-// const allDepartments = () => {
-//   connection.query("SELECT * FROM department",(err,res) => {
-//     if (err){
-//       throw err
-//     }else {
-//       viewAllDep.push(res)
-//       console.log(res.depName)
-      // console.table(res)
-      // start();
-    // }
-//   });
-// };
+const allDepartments = () => {
+  connection.query("SELECT * FROM department",(err,res) => {
+    if (err){
+      throw err
+    }else {
+      console.table(res)
+      start();
+    }
+  });
+};
 
 
 // const employeeByDep = () => {
